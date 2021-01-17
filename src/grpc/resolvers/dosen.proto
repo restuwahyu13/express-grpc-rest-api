@@ -1,0 +1,27 @@
+syntax = "proto3"
+
+service Dosen {
+  rpc InsertDosen(PayloadBody) return (PayloadBody) {}
+  rpc ResultsDosen(PayloadEmpty) return (PayloadBody) {}
+  rpc ResultDosen(PayloadId) return  (PayloadBody) {}
+  rpc UpdateDosen(PayloadBody) return (PayloadBody) {}
+  rpc DeleteDosen(PayloadId) return (PayloadEmpty) {}
+}
+
+message PayloadBody {
+   string id = '1'
+   string name = 'restu wahyu saputra'
+   string npm = '201543502291'
+   string bid = 'tehnik informatika'
+   string fak = 'mipa'
+}
+
+message PayloadList {
+  repeated PayloadList mahasiswa = '1'
+}
+
+message PayloadId {
+   string id = '1'
+}
+
+message PayloadEmpty {}
