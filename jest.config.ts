@@ -1,4 +1,4 @@
-import type { Config } from '@jest/types'
+import { Config } from '@jest/types'
 
 const config: Config.InitialOptions = {
 	testMatch: ['<rootDir>/test/**/*.{test.ts, spec.ts}', '<rootDir>/__tests__/**/*.{test.ts, spec.ts}'],
