@@ -1,27 +1,14 @@
 syntax = "proto3"
 
-service Mahasiswa {
-  rpc InsertMahasiswa(PayloadBody) return (PayloadBody) {}
-  rpc ResultsMahasiswa(PayloadEmpty) return (PayloadBody) {}
-  rpc ResultMahasiswa(PayloadId) return  (PayloadBody) {}
-  rpc UpdateMahasiswa(PayloadBody) return (PayloadBody) {}
-  rpc DeleteMahasiswa(PayloadId) return (PayloadEmpty) {}
-}
 
 message PayloadBody {
-   string id = '1'
-   string name = 'restu wahyu saputra'
-   string npm = '201543502291'
-   string bid = 'tehnik informatika'
-   string fak = 'mipa'
+  string id = 1
+  string name = 1
+  string npm = 1
+  string bid = 1
+  string fak = 1
 }
 
-message PayloadList {
-  repeated PayloadList mahasiswa = '1'
+service Mahasiswa {
+  rpc InsertMahasiswa(PayloadBody) return (PayloadBody) {}
 }
-
-message PayloadId {
-   string id = '1'
-}
-
-message PayloadEmpty {}

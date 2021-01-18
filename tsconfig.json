@@ -1,20 +1,21 @@
 {
-  "compilerOptions": {
-    "outDir": "dist",
-    "target": "ESNext",
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "downlevelIteration": true,
-    "allowSyntheticDefaultImports": true,
-    "importHelpers": true,
-    "skipLibCheck": true,
-    "noEmitOnError": true,
-    "sourceMap": true,
-    "noImplicitAny": false,
-    "strict": false,
-    "alwaysStrict": false
-  },
-  "include": ["server.ts", "src/**/*.{ts}", "__tests__/**/*.{spect.ts, test.ts}"],
-  "exclude": ["node_modules", "dist", "coverage"]
+	"compilerOptions": {
+		"outDir": "dist",
+		"target": "ESNext",
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"downlevelIteration": true,
+		"allowSyntheticDefaultImports": true,
+		"importHelpers": true,
+		"skipLibCheck": true,
+		"noEmitOnError": true,
+		"sourceMap": true,
+		"noImplicitAny": false,
+		"strict": false,
+		"alwaysStrict": false,
+		"typeRoots": ["./node_modules/@types"]
+	},
+	"include": ["server.ts", "src/**/*.{ts}", "__tests__/**/*.{spect.ts, test.ts}"],
+	"exclude": ["./node_modules", "./dist", "./coverage", "./__tests__/**/*.{spect.ts, test.ts}"]
 }

@@ -9,19 +9,19 @@ service Dosen {
 }
 
 message PayloadBody {
-   string id = '1'
-   string name = 'restu wahyu saputra'
-   string npm = '201543502291'
-   string bid = 'tehnik informatika'
-   string fak = 'mipa'
+  string id = 1
+  string name= 1
+  string npm = 1
+  string bid = 1
+  string fak = 1
 }
 
 message PayloadList {
-  repeated PayloadList mahasiswa = '1'
+  repeated PayloadList mahasiswa = 1
 }
 
 message PayloadId {
-   string id = '1'
+  string id = 1
 }
 
 message PayloadEmpty {}

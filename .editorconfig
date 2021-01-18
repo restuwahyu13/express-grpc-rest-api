@@ -7,6 +7,6 @@ charset = utf-8
 tab_width = 2
 indent_style = tab
 
-[Makefile,Dockerfile]
+[Makefile,Dockerfile,proto]
 tab_width = 2
 indent_style = tab
