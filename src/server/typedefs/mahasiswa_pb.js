@@ -70,7 +70,7 @@ proto.mahasiswa.StudentPayload.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    npm: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    npm: jspb.Message.getFieldWithDefault(msg, 3, ""),
     bid: jspb.Message.getFieldWithDefault(msg, 4, ""),
     fak: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
@@ -118,7 +118,7 @@ proto.mahasiswa.StudentPayload.deserializeBinaryFromReader = function(msg, reade
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {string} */ (reader.readString());
       msg.setNpm(value);
       break;
     case 4:
@@ -173,8 +173,8 @@ proto.mahasiswa.StudentPayload.serializeBinaryToWriter = function(message, write
     );
   }
   f = message.getNpm();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
@@ -233,20 +233,20 @@ proto.mahasiswa.StudentPayload.prototype.setName = function(value) {
 
 
 /**
- * optional int32 npm = 3;
- * @return {number}
+ * optional string npm = 3;
+ * @return {string}
  */
 proto.mahasiswa.StudentPayload.prototype.getNpm = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.mahasiswa.StudentPayload} returns this
  */
 proto.mahasiswa.StudentPayload.prototype.setNpm = function(value) {
-  return jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

@@ -15,7 +15,7 @@ service Student {
 message StudentPayload {
   string id = 1;
   string name = 2;
-  int32 npm = 3;
+  string npm = 3;
   string bid = 4;
   string fak = 5;
 }
