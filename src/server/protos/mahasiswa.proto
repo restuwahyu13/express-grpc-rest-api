@@ -2,15 +2,15 @@ syntax = "proto3";
 
 package student;
 
-// import "google/protobuf/empty.proto";
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 service Student {
   rpc InsertStudent(StudentRequest) returns (StudentResponse) {}
-  // rpc ResultsStudent(google.protobuf.Empty) returns (stream Students) {}
-  // rpc ResultStudent(StudentId) returns (StudentResponse) {}
-  // rpc DeleteStudent(StudentId) returns (google.protobuf.Empty) {}
-  // rpc UpdateStudent(StudentRequest) returns (StudentResponse) {}
+  rpc ResultsStudent(google.protobuf.Empty) returns (stream Students) {}
+  rpc ResultStudent(StudentId) returns (StudentResponse) {}
+  rpc DeleteStudent(StudentId) returns (StudentResponse) {}
+  rpc UpdateStudent(StudentRequest) returns (StudentResponse) {}
 }
 
 message StudentRequest {
@@ -39,10 +39,12 @@ message StudentResponse {
     string message = 11;
 }
 
-// message Students {
-//   repeated StudentResponse students = 1;
-// }
+message Students {
+  repeated StudentRequest students = 1;
+  string statusCode = 10;
+  string message = 11;
+}
 
-// message StudentId {
-//   string id = 1;
-// }
+message StudentId {
+  string id = 1;
+}
