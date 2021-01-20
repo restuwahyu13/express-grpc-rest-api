@@ -16,6 +16,7 @@ export const createStudent = (req: Request, res: Response): void => {
 	client.insertStudent(bodyPayload, (error: ServiceError, response: StudentResponse): void => {
 		if (error) {
 			grpcMessage(res, {
+				method: req.method,
 				statusCode: +response.getStatuscode(),
 				message: response.getMessage(),
 				errorMessage: new GrpcError({ ...error })
