@@ -2,8 +2,9 @@ import { Request, Response } from 'express'
 import { ServiceError } from '@grpc/grpc-js'
 import { grpcClient } from '../../middlewares/middleware.grpc'
 import { StudentPayload } from '../../../server/typedefs/mahasiswa_pb'
+import { grpcMessage } from '../../utils/util.message'
 
-export const createStudent = (req: Request, res: Response): Response<any> => {
+export const createStudent = (req: Request, res: Response): void => {
 	const client = grpcClient()
 	const bodyPayload: InstanceType<typeof StudentPayload> = new StudentPayload()
 	bodyPayload.setId(req.body.id)
@@ -13,25 +14,24 @@ export const createStudent = (req: Request, res: Response): Response<any> => {
 
 	client.insertStudent(bodyPayload, (error: ServiceError, response: StudentPayload): void => {
 		if (error) {
-			return res.status(500).json({
+			grpcMessage(res, {
 				method: req.method,
-				status: res.statusCode,
-				message: 'Internal Server Error',
-				error: error
+				statusCode: res.statusCode,
+				message: `GrpcErrors: ${error}`
 			})
 		}
 
 		if (response.toArray().length > 0) {
-			return res.status(401).json({
+			grpcMessage(res, {
 				method: req.method,
-				status: res.statusCode,
+				statusCode: res.statusCode,
 				message: 'student already exist'
 			})
 		}
 
-		return res.status(201).json({
+		grpcMessage(res, {
 			method: req.method,
-			status: res.statusCode,
+			statusCode: res.statusCode,
 			message: 'add student successfully',
 			data: response.toObject()
 		})
