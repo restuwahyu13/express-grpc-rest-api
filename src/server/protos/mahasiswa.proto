@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package mahasiswa;
+
+// import "google/protobuf/empty.proto";
+
+service Student {
+  rpc InsertStudent(StudentPayload) returns (StudentPayload) {}
+  // rpc ResultsStudent(google.protobuf.Empty) returns (stream StudentsPayload) {}
+  // rpc ResultStudent(StudentPayloadId) returns (stream StudentPayload) {}
+  // rpc DeleteStudent(StudentPayloadId) returns (google.protobuf.Empty) {}
+  // rpc UpdateStudent(StudentPayloadId) returns (StudentPayload) {}
+}
+
+message StudentPayload {
+  string id = 1;
+  string name = 2;
+  int32 npm = 3;
+  string bid = 4;
+  string fak = 5;
+}
+
+// message StudentsPayload {
+//   repeated StudentPayload students = 1;
+// }
+
+// message StudentPayloadId {
+//   string id = 1;
+// }

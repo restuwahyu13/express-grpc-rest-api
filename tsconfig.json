@@ -14,8 +14,9 @@
 		"noImplicitAny": false,
 		"strict": false,
 		"alwaysStrict": false,
+		"noUnusedParameters": false,
 		"typeRoots": ["./node_modules/@types"]
 	},
-	"include": ["server.ts", "src/**/*.{ts}", "__tests__/**/*.{spect.ts, test.ts}"],
+	"include": ["server.ts", "client.ts", "src/**/*.{ts}"],
 	"exclude": ["./node_modules", "./dist", "./coverage", "./__tests__/**/*.{spect.ts, test.ts}"]
 }
