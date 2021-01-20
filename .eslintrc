@@ -17,7 +17,8 @@
 		"prettier/prettier": 1,
 		"@typescript-eslint/no-explicit-any": 0,
 		"node/handle-callback-err": 0,
-		"prefer-const": 0
+		"prefer-const": 0,
+		"camelcase": 0
 	},
 	"env": {
 		"jest/globals": true
