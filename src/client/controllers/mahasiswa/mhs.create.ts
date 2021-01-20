@@ -19,10 +19,7 @@ export const createStudent = (req: Request, res: Response): void => {
 			grpcMessage(res, {
 				method: req.method,
 				statusCode: 500,
-				errorMessage: new GrpcError({
-					code: error.code,
-					details: error.details
-				})
+				errorMessage: new GrpcError({ ...error })
 			})
 		}
 

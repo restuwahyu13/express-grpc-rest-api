@@ -9,6 +9,13 @@ PROTOC_GEN_TS_PATH_WINDOWS := ${realpath node_modules/.bin/protoc-gen-ts.cmd}
 PROTOC_GEN_TS_PATH_LINMAC := ${realpath node_modules/.bin/protoc-gen-ts}
 
 ###############################
+## BUILD APPLICATION
+################################
+
+build:
+	${NPM} ${FLAG} build
+
+###############################
 ## RUNNING DEV APP ENVIRONMENT
 ################################
 
