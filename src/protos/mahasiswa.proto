@@ -9,7 +9,7 @@ service Student {
   rpc ResultsStudent(google.protobuf.Empty) returns (StudentList) {}
   rpc ResultStudent(StudentId) returns (StudentResponse) {}
   rpc DeleteStudent(StudentId) returns (StudentResponse) {}
-  // rpc UpdateStudent(StudentRequest) returns (StudentResponse) {}
+  rpc UpdateStudent(StudentRequest) returns (StudentResponse) {}
 }
 
 message StudentRequest {

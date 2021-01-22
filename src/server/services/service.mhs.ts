@@ -112,23 +112,38 @@ export const StudentSeviceImplementation: IStudentServer = {
 				callback(null, studentResponse)
 			}
 		})
+	},
+	updateStudent: (call: UnaryCall<StudentRequest, StudentResponse>, callback: UnaryData<StudentResponse>) => {
+		const studentResponse = new StudentResponse()
+
+		studentSchema.findByIdAndUpdate(
+			{ _id: call.request.getId() },
+			{
+				$set: {
+					name: call.request.getName(),
+					npm: call.request.getNpm(),
+					fak: call.request.getFak(),
+					bid: call.request.getBid(),
+					updatedAt: new Date()
+				}
+			},
+			(error: any, result: StudentDTO) => {
+				if (error) {
+					studentResponse.setStatuscode('500')
+					studentResponse.setMessage('internal server error')
+					callback(error, studentResponse)
+				}
+
+				if (result) {
+					studentResponse.setStatuscode('200')
+					studentResponse.setMessage('student data successfully to updated')
+					callback(null, studentResponse)
+				} else {
+					studentResponse.setStatuscode('404')
+					studentResponse.setMessage('student data is not exist, failed to updated')
+					callback(null, studentResponse)
+				}
+			}
+		)
 	}
-	// updateStudent: (call: UnaryCall<Payload, Payload>, callback: UnaryData<Payload>) => {
-	// 	// studentSchema.findByIdAndUpdate(
-	// 	// 	{ _id: call.request.getId() },
-	// 	// 	{
-	// 	// 		$set: {
-	// 	// 			name: call.request.getName(),
-	// 	// 			npm: call.request.getNpm(),
-	// 	// 			fak: call.request.getFak(),
-	// 	// 			bid: call.request.getBid(),
-	// 	// 			updated_at: call.request.getUpdatedAt()
-	// 	// 		}
-	// 	// 	},
-	// 	// 	(error) => {
-	// 	// 		if (error) callback(error, null)
-	// 	// 		callback(null, call.request)
-	// 	// 	}
-	// 	// )
-	// }
 }
