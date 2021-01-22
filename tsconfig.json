@@ -17,6 +17,6 @@
 		"noUnusedParameters": false,
 		"typeRoots": ["./node_modules/@types"]
 	},
-	"include": ["bin/**/*.ts", "src/**/*.ts"],
-	"exclude": ["./node_modules", "./dist", "./coverage", "./__tests__/**/*.{spect.ts, test.ts}"]
+	"include": ["www/**/*.ts"],
+	"exclude": ["./node_modules", "./dist"]
 }

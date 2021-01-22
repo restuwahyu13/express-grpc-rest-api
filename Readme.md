@@ -4,4 +4,4 @@ berikut ini adalah tutorial basic implementasi cara menggunakan `grpc` **(google
 
 ### NOTED
 
-sedang dalam tahap **maintance**
+**work on progress**
