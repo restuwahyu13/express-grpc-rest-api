@@ -1,8 +1,8 @@
-import { StudentRequest } from '../../typedefs/mahasiswa_pb'
+import { StudentRequest as Request } from '../../typedefs/mahasiswa_pb'
 import { StudentDTO } from '../dto/dto.mhs'
 
-function RequestPayload({ id, name, npm, fak, bid, createdAt, updatedAt }: StudentRequest.AsObject): StudentRequest {
-	const studentRequest = new StudentRequest()
+function StudentsResponse({ id, name, npm, fak, bid, createdAt, updatedAt }: Request.AsObject): Request {
+	const studentRequest = new Request()
 	studentRequest.setId(id)
 	studentRequest.setName(name)
 	studentRequest.setNpm(npm)
@@ -14,4 +14,19 @@ function RequestPayload({ id, name, npm, fak, bid, createdAt, updatedAt }: Stude
 	return studentRequest
 }
 
-export const studentRequest = (results: StudentDTO[]): StudentRequest[] => results.map((results) => RequestPayload(results))
+// function StudentResponse({ id, name, npm, fak, bid, createdAt, updatedAt }: Reponse.AsObject, Res: Reponse): Reponse {
+// 	Res.setId(id)
+// 	Res.setName(name)
+// 	Res.setNpm(npm)
+// 	Res.setFak(fak)
+// 	Res.setBid(bid)
+// 	Res.setCreatedAt(new Date(createdAt).toISOString())
+// 	Res.setUpdatedAt(new Date(updatedAt).toISOString())
+
+// 	return Res
+// }
+
+export const studentsResponse = (results: StudentDTO[]): Request[] =>
+	results.map((results: StudentDTO) => StudentsResponse(results))
+
+// export const studentResponse = (result: StudentDTO, Res: Reponse): Reponse => StudentResponse(result, Res)

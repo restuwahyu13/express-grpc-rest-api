@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import compression from 'compression'
 import helmet from 'helmet'
+import morgan from 'morgan'
 
 export const pluginMiddleware = (app: Express): void => {
 	app.use(bodyParser.json())
@@ -17,8 +18,5 @@ export const pluginMiddleware = (app: Express): void => {
 			strategy: zlib.constants.Z_RLE
 		})
 	)
-	if (process.env.NODE_ENV !== 'production') {
-		import morgan from 'morgan'
-		app.use(morgan('dev'))
-	}
+	app.use(morgan('dev'))
 }

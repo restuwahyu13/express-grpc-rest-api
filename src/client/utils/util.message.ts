@@ -10,10 +10,18 @@ interface IMessage {
 	readonly data?: Record<string, any> | Record<string, any>[]
 }
 
+const waitFor = () => new Promise(() => setInterval)
+
 export const grpcMessage = <T extends IMessage>(handler: Response, options: T): void => {
 	try {
 		const data: IMessage = { ...options }
-		event.once('message', (): EventEmitter => handler.status(data.statusCode).json({ ...data }))
+		event.once(
+			'message',
+			async (): EventEmitter => {
+				handler.status(data.statusCode).json({ ...data })
+				await waitFor(2000)
+			}
+		)
 		event.emit('message')
 	} catch (e) {}
 }

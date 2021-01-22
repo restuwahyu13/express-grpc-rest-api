@@ -1,10 +1,10 @@
 import { ServerUnaryCall as UnaryCall, sendUnaryData as UnaryData } from '@grpc/grpc-js'
 import { Empty } from 'google-protobuf/google/protobuf/empty_pb'
 import { IStudentServer } from '../../typedefs/mahasiswa_grpc_pb'
-import { StudentRequest, StudentResponse, StudentList } from '../../typedefs/mahasiswa_pb'
+import { StudentRequest, StudentResponse, StudentList, StudentId } from '../../typedefs/mahasiswa_pb'
 import { studentSchema } from '../models/model.mhs'
 import { StudentDTO } from '../dto/dto.mhs'
-import { studentRequest } from '../utils/util.request'
+import { studentsResponse } from '../utils/util.request'
 
 export const StudentSeviceImplementation: IStudentServer = {
 	insertStudent: (call: UnaryCall<StudentRequest, StudentResponse>, callback: UnaryData<StudentResponse>) => {
@@ -18,11 +18,6 @@ export const StudentSeviceImplementation: IStudentServer = {
 			}
 
 			if (results.length > 0) {
-				studentResponse.setId(results[0].id)
-				studentResponse.setName(results[0].name)
-				studentResponse.setNpm(results[0].npm)
-				studentResponse.setFak(results[0].fak)
-				studentResponse.setBid(results[0].bid)
 				studentResponse.setStatuscode('409')
 				studentResponse.setMessage('student already exist')
 				callback(null, studentResponse)
@@ -48,35 +43,55 @@ export const StudentSeviceImplementation: IStudentServer = {
 		})
 	},
 	resultsStudent: (call: UnaryCall<Empty, Empty>, callback: UnaryData<StudentList>) => {
-		const studentList = new StudentList()
+		const studentsList = new StudentList()
 
 		studentSchema.find({}, (error: any, results: StudentDTO[]) => {
 			if (error) {
-				studentList.setStatuscode('500')
-				studentList.setMessage('internal server error')
-				callback(error, studentList)
+				studentsList.setStatuscode('500')
+				studentsList.setMessage('internal server error')
+				callback(error, studentsList)
 			}
 
 			if (results.length > 0) {
-				studentList.setStudentsList(studentRequest(results))
-				studentList.setStatuscode('200')
-				studentList.setMessage('student data already to use')
-				callback(null, studentList)
+				studentsList.setStudentsList(studentsResponse(results))
+				studentsList.setStatuscode('200')
+				studentsList.setMessage('student data already to use')
+				callback(null, studentsList)
 			} else {
-				studentList.setStudentsList(studentRequest(results))
-				studentList.setStatuscode('404')
-				studentList.setMessage('student data is not exist')
-				callback(null, studentList)
+				studentsList.setStatuscode('404')
+				studentsList.setMessage('student data is not exist')
+				callback(null, studentsList)
+			}
+		})
+	},
+	resultStudent: (call: UnaryCall<StudentId, StudentResponse>, callback: UnaryData<StudentResponse>) => {
+		const studentResponse = new StudentResponse()
+
+		studentSchema.findOne({ id: call.request.getId() }, (error: any, result: StudentDTO) => {
+			if (error) {
+				studentResponse.setStatuscode('500')
+				studentResponse.setMessage('internal server error')
+				callback(error, studentResponse)
+			}
+
+			if (result) {
+				studentResponse.setId(result.id)
+				studentResponse.setName(result.name)
+				studentResponse.setNpm(result.npm)
+				studentResponse.setFak(result.fak)
+				studentResponse.setBid(result.bid)
+				studentResponse.setCreatedAt(new Date(result.createdAt).toISOString())
+				studentResponse.setUpdatedAt(new Date(result.updatedAt).toISOString())
+				studentResponse.setStatuscode('200')
+				studentResponse.setMessage('add new student failed')
+				callback(null, studentResponse)
+			} else {
+				studentResponse.setStatuscode('404')
+				studentResponse.setMessage('student data is not exist')
+				callback(null, studentResponse)
 			}
 		})
 	}
-	// resultStudent: (call: UnaryCall<PayloadId, Payload>, callback: WritableStream<Payload, Payload>) => {
-	// 	// studentSchema.findOne({ _id: call.request.getId() }, (error, result) => {
-	// 	// 	if (error) callback.write(error)
-	// 	// 	callback.write(result)
-	// 	// 	callback.end()
-	// 	// })
-	// },
 	// deleteStudent: (call: UnaryCall<PayloadId, Empty>, callback: UnaryData<Empty>) => {
 	// 	// studentSchema.findByIdAndDelete({ _id: call.request.getId() }, () => {
 	// 	// 	// if (error) callback(error, new Empty())

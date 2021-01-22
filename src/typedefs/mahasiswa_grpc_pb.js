@@ -16,6 +16,17 @@ function deserialize_google_protobuf_Empty(buffer_arg) {
   return google_protobuf_empty_pb.Empty.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_student_StudentId(arg) {
+  if (!(arg instanceof mahasiswa_pb.StudentId)) {
+    throw new Error('Expected argument of type student.StudentId');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_student_StudentId(buffer_arg) {
+  return mahasiswa_pb.StudentId.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_student_StudentList(arg) {
   if (!(arg instanceof mahasiswa_pb.StudentList)) {
     throw new Error('Expected argument of type student.StudentList');
@@ -72,6 +83,17 @@ var StudentService = exports.StudentService = {
     requestDeserialize: deserialize_google_protobuf_Empty,
     responseSerialize: serialize_student_StudentList,
     responseDeserialize: deserialize_student_StudentList,
+  },
+  resultStudent: {
+    path: '/student.Student/ResultStudent',
+    requestStream: false,
+    responseStream: false,
+    requestType: mahasiswa_pb.StudentId,
+    responseType: mahasiswa_pb.StudentResponse,
+    requestSerialize: serialize_student_StudentId,
+    requestDeserialize: deserialize_student_StudentId,
+    responseSerialize: serialize_student_StudentResponse,
+    responseDeserialize: deserialize_student_StudentResponse,
   },
 };
 
