@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import mongoose from 'mongoose'
 import * as grpc from '@grpc/grpc-js'
-import { StudentService } from '../src/server/typedefs/mahasiswa_grpc_pb'
+import { StudentService } from '../src/typedefs/mahasiswa_grpc_pb'
 import { StudentSeviceImplementation } from '../src/server/services/service.mhs'
 
 // init grpc server

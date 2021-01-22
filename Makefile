@@ -1,8 +1,8 @@
 NPM := npm
 FLAG := run
 
-INPUT_DIR := ${realpath src/server/protos}
-OUTPUT_DIR := ${realpath src/server/typedefs}
+INPUT_DIR := ${realpath src/protos}
+OUTPUT_DIR := ${realpath src/typedefs}
 FIND_FILE := ${wildcard ${OUTPUT_DIR}/*.ts}
 GRPC_TOOLS = grpc_tools_node_protoc
 PROTOC_GEN_TS_PATH_WINDOWS := ${realpath node_modules/.bin/protoc-gen-ts.cmd}

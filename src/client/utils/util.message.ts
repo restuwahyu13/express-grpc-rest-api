@@ -1,6 +1,6 @@
 import { Response } from 'express'
 import EventEmitter from 'events'
-import { StudentResponse } from '../../server/typedefs/mahasiswa_pb'
+import { StudentResponse } from '../../typedefs/mahasiswa_pb'
 const event = new EventEmitter()
 
 interface IMessage {
@@ -8,7 +8,7 @@ interface IMessage {
 	readonly statusCode: number
 	readonly message?: string
 	readonly errorMessage?: Error
-	readonly data?: StudentResponse.AsObject | StudentResponse.AsObject[]
+	readonly data?: Record<string, any> | Record<string, any>[]
 }
 
 export const grpcMessage = <T extends IMessage>(handler: Response, options: T): void => {

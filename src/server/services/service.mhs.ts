@@ -1,13 +1,16 @@
 import { ServerUnaryCall as UnaryCall, sendUnaryData as UnaryData } from '@grpc/grpc-js'
-// import { Empty } from 'google-protobuf/google/protobuf/empty_pb'
+import { Empty } from 'google-protobuf/google/protobuf/empty_pb'
+import { IStudentServer } from '../../typedefs/mahasiswa_grpc_pb'
+import { StudentRequest, StudentResponse, StudentList } from '../../typedefs/mahasiswa_pb'
 import { studentSchema } from '../models/model.mhs'
-import { IStudentServer } from '../typedefs/mahasiswa_grpc_pb'
-import { StudentRequest, StudentResponse } from '../typedefs/mahasiswa_pb'
+import { StudentDTO } from '../dto/dto.mhs'
+import { studentRequest } from '../utils/util.request'
 
 export const StudentSeviceImplementation: IStudentServer = {
 	insertStudent: (call: UnaryCall<StudentRequest, StudentResponse>, callback: UnaryData<StudentResponse>) => {
 		const studentResponse = new StudentResponse()
-		studentSchema.find({ $or: [{ npm: call.request.getNpm() }] }, (error, results) => {
+
+		studentSchema.find({ $or: [{ npm: call.request.getNpm() }] }, (error: any, results: StudentDTO[]) => {
 			if (error) {
 				studentResponse.setStatuscode('500')
 				studentResponse.setMessage('Internal Server Error')
@@ -32,25 +35,41 @@ export const StudentSeviceImplementation: IStudentServer = {
 					created_at: call.request.getCreatedAt()
 				})
 
-				if (!saveUser) {
-					studentResponse.setStatuscode('403')
-					studentResponse.setMessage('add new student failed')
-					callback(null, studentResponse)
-				} else {
+				if (saveUser) {
 					studentResponse.setStatuscode('201')
 					studentResponse.setMessage('add new student successfully')
+					callback(null, studentResponse)
+				} else {
+					studentResponse.setStatuscode('403')
+					studentResponse.setMessage('add new student failed')
 					callback(null, studentResponse)
 				}
 			}
 		})
+	},
+	resultsStudent: (call: UnaryCall<Empty, Empty>, callback: UnaryData<StudentList>) => {
+		const studentList = new StudentList()
+
+		studentSchema.find({}, (error: any, results: StudentDTO[]) => {
+			if (error) {
+				studentList.setStatuscode('500')
+				studentList.setMessage('internal server error')
+				callback(error, studentList)
+			}
+
+			if (results.length > 0) {
+				studentList.setStudentsList(studentRequest(results))
+				studentList.setStatuscode('200')
+				studentList.setMessage('student data already to use')
+				callback(null, studentList)
+			} else {
+				studentList.setStudentsList(studentRequest(results))
+				studentList.setStatuscode('404')
+				studentList.setMessage('student data is not exist')
+				callback(null, studentList)
+			}
+		})
 	}
-	// resultsStudent: (call: WritableStream<Empty, Payload>) => {
-	// 	studentSchema.find({}, (error, results) => {
-	// 		if (error) call.write(error)
-	// 		call.write(results)
-	// 		call.end()
-	// 	})
-	// },
 	// resultStudent: (call: UnaryCall<PayloadId, Payload>, callback: WritableStream<Payload, Payload>) => {
 	// 	// studentSchema.findOne({ _id: call.request.getId() }, (error, result) => {
 	// 	// 	if (error) callback.write(error)

@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose'
 import shortId from 'shortid'
-import { IStudent } from '../dto/dto.mhs'
+import { StudentDTO } from '../dto/dto.mhs'
 
 const Schema: mongoose.Schema = new mongoose.Schema({
 	id: {
@@ -30,14 +30,14 @@ const Schema: mongoose.Schema = new mongoose.Schema({
 		trim: true,
 		required: [true, 'bidang studi is required']
 	},
-	created_at: {
+	createdAt: {
 		type: Date,
 		default: new Date()
 	},
-	updated_at: {
+	updatedAt: {
 		type: Date,
 		default: new Date()
 	}
 })
 
-export const studentSchema = mongoose.model<IStudent>('student', Schema)
+export const studentSchema = mongoose.model<StudentDTO>('student', Schema)

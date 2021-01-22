@@ -1,9 +1,8 @@
 import { Request, Response } from 'express'
 import { ServiceError } from '@grpc/grpc-js'
 import { grpcClient } from '../../middlewares/middleware.grpc'
-import { StudentRequest, StudentResponse } from '../../../server/typedefs/mahasiswa_pb'
+import { StudentRequest, StudentResponse } from '../../../typedefs/mahasiswa_pb'
 import { grpcMessage } from '../../utils/util.message'
-import { GrpcError } from '../../utils/util.error'
 
 export const createStudent = (req: Request, res: Response): void => {
 	const client = grpcClient()
@@ -18,8 +17,7 @@ export const createStudent = (req: Request, res: Response): void => {
 			grpcMessage(res, {
 				method: req.method,
 				statusCode: +response.getStatuscode(),
-				message: response.getMessage(),
-				errorMessage: new GrpcError({ ...error })
+				message: response.getMessage()
 			})
 		}
 
