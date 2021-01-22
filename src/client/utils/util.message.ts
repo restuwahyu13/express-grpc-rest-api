@@ -23,5 +23,6 @@ export const grpcMessage = <T extends IMessage>(handler: Response, options: T): 
 			}
 		)
 		event.emit('message')
+		clearInterval(waitFor)
 	} catch (e) {}
 }

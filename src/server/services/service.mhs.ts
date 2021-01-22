@@ -59,7 +59,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 				callback(null, studentsList)
 			} else {
 				studentsList.setStatuscode('404')
-				studentsList.setMessage('student data is not exist')
+				studentsList.setMessage('student data is not exist, or deleted from owner')
 				callback(null, studentsList)
 			}
 		})
@@ -83,21 +83,36 @@ export const StudentSeviceImplementation: IStudentServer = {
 				studentResponse.setCreatedAt(new Date(result.createdAt).toISOString())
 				studentResponse.setUpdatedAt(new Date(result.updatedAt).toISOString())
 				studentResponse.setStatuscode('200')
-				studentResponse.setMessage('add new student failed')
+				studentResponse.setMessage('student data already to use')
 				callback(null, studentResponse)
 			} else {
 				studentResponse.setStatuscode('404')
-				studentResponse.setMessage('student data is not exist')
+				studentResponse.setMessage('student data is not exist, or deleted from owner')
+				callback(null, studentResponse)
+			}
+		})
+	},
+	deleteStudent: (call: UnaryCall<StudentId, Empty>, callback: UnaryData<StudentResponse>) => {
+		const studentResponse = new StudentResponse()
+
+		studentSchema.findByIdAndDelete({ id: call.request.getId() }, (error: any, result: StudentDTO) => {
+			if (error) {
+				studentResponse.setStatuscode('500')
+				studentResponse.setMessage('internal server error')
+				callback(error, studentResponse)
+			}
+
+			if (result) {
+				studentResponse.setStatuscode('200')
+				studentResponse.setMessage('student data successfully to deleted')
+				callback(null, studentResponse)
+			} else {
+				studentResponse.setStatuscode('404')
+				studentResponse.setMessage('student data is not exist, or deleted from owner')
 				callback(null, studentResponse)
 			}
 		})
 	}
-	// deleteStudent: (call: UnaryCall<PayloadId, Empty>, callback: UnaryData<Empty>) => {
-	// 	// studentSchema.findByIdAndDelete({ _id: call.request.getId() }, () => {
-	// 	// 	// if (error) callback(error, new Empty())
-	// 	// 	callback(null, new Empty())
-	// 	// })
-	// },
 	// updateStudent: (call: UnaryCall<Payload, Payload>, callback: UnaryData<Payload>) => {
 	// 	// studentSchema.findByIdAndUpdate(
 	// 	// 	{ _id: call.request.getId() },

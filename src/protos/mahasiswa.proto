@@ -8,7 +8,7 @@ service Student {
   rpc InsertStudent(StudentRequest) returns (StudentResponse) {}
   rpc ResultsStudent(google.protobuf.Empty) returns (StudentList) {}
   rpc ResultStudent(StudentId) returns (StudentResponse) {}
-  // rpc DeleteStudent(StudentId) returns (StudentResponse) {}
+  rpc DeleteStudent(StudentId) returns (StudentResponse) {}
   // rpc UpdateStudent(StudentRequest) returns (StudentResponse) {}
 }
 
