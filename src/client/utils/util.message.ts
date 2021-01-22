@@ -1,6 +1,5 @@
 import { Response } from 'express'
 import EventEmitter from 'events'
-import { StudentResponse } from '../../typedefs/mahasiswa_pb'
 const event = new EventEmitter()
 
 interface IMessage {
