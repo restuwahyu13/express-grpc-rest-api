@@ -110,3 +110,17 @@ else
 	--ts_out=grpc_js:${OUTPUT_DIR} \
 	--proto_path ${INPUT_DIR} ${INPUT_DIR}/*.proto
 endif
+
+
+###############################
+## BUILD AUTOMATION
+################################
+
+autob: linfix.o  build.o 
+
+linfix.o:
+
+	${NPM} ${FLAG} lint:ffix
+
+build.o:
+	${NPM} ${FLAG} build

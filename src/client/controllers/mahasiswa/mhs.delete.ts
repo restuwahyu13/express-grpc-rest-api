@@ -18,7 +18,7 @@ export const deleteStudent = (req: Request, res: Response): void => {
 			})
 		}
 
-		if (response !== undefined && response.toArray().length > 0) {
+		if (response !== undefined && response.getId() !== '') {
 			grpcMessage(res, {
 				method: req.method,
 				statusCode: +response.getStatuscode(),

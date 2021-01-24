@@ -13,7 +13,7 @@ export const updateStudent = (req: Request, res: Response): void => {
 	payloadBody.setFak(req.body.fak)
 	payloadBody.setBid(req.body.bid)
 
-	client.updateStudent(params, (error: ServiceError, response: StudentResponse): void => {
+	client.updateStudent(payloadBody, (error: ServiceError, response: StudentResponse): void => {
 		if (error) {
 			grpcMessage(res, {
 				method: req.method,
@@ -22,7 +22,7 @@ export const updateStudent = (req: Request, res: Response): void => {
 			})
 		}
 
-		if (response !== undefined && response.toArray().length > 0) {
+		if (response !== undefined && response.getId() !== '') {
 			grpcMessage(res, {
 				method: req.method,
 				statusCode: +response.getStatuscode(),

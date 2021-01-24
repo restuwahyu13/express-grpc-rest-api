@@ -10,19 +10,16 @@ interface IMessage {
 	readonly data?: Record<string, any> | Record<string, any>[]
 }
 
-const waitFor = () => new Promise(() => setInterval)
+const waitFor = (): Promise<number> => new Promise(() => setInterval)
 
-export const grpcMessage = <T extends IMessage>(handler: Response, options: T): void => {
+export const grpcMessage = async <T extends IMessage>(handler: Response, options: T): Promise<void> => {
 	try {
 		const data: IMessage = { ...options }
-		event.once(
-			'message',
-			async (): EventEmitter => {
-				handler.status(data.statusCode).json({ ...data })
-				await waitFor(2000)
-			}
-		)
+		event.once('message', (): void => {
+			handler.status(data.statusCode).json({ ...data })
+			waitFor().then(() => 2000)
+		})
 		event.emit('message')
-		clearInterval(waitFor)
+		clearInterval(await waitFor())
 	} catch (e) {}
 }

@@ -49,7 +49,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 			if (error) {
 				studentsList.setStatuscode('500')
 				studentsList.setMessage('internal server error')
-				callback(error, studentsList)
+				callback(null, studentsList)
 			}
 
 			if (results.length > 0) {
@@ -71,7 +71,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 			if (error) {
 				studentResponse.setStatuscode('500')
 				studentResponse.setMessage('internal server error')
-				callback(error, studentResponse)
+				callback(null, studentResponse)
 			}
 
 			if (result) {
@@ -103,7 +103,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 			}
 
 			if (result) {
-				studentSchema.deleteOne({ id: result.id }, (error: any) => {
+				studentSchema.deleteOne({ id: result.id }, {}, (error: any) => {
 					if (error) {
 						studentResponse.setStatuscode('500')
 						studentResponse.setMessage('internal server error')
@@ -124,34 +124,48 @@ export const StudentSeviceImplementation: IStudentServer = {
 	updateStudent: (call: UnaryCall<StudentRequest, StudentResponse>, callback: UnaryData<StudentResponse>) => {
 		const studentResponse = new StudentResponse()
 
-		studentSchema.findByIdAndUpdate(
-			{ _id: call.request.getId() },
-			{
-				$set: {
-					name: call.request.getName(),
-					npm: call.request.getNpm(),
-					fak: call.request.getFak(),
-					bid: call.request.getBid(),
-					updatedAt: new Date()
-				}
-			},
-			(error: any, result: StudentDTO) => {
-				if (error) {
-					studentResponse.setStatuscode('500')
-					studentResponse.setMessage('internal server error')
-					callback(null, studentResponse)
-				}
-
-				if (result) {
-					studentResponse.setStatuscode('200')
-					studentResponse.setMessage('student data successfully to updated')
-					callback(null, studentResponse)
-				} else {
-					studentResponse.setStatuscode('404')
-					studentResponse.setMessage('student data is not exist, failed to updated')
-					callback(null, studentResponse)
-				}
+		studentSchema.findOne({ id: call.request.getId() }, (error: any, result: StudentDTO) => {
+			if (error) {
+				studentResponse.setStatuscode('500')
+				studentResponse.setMessage('internal server error')
+				callback(error, studentResponse)
 			}
-		)
+
+			if(result) {
+				studentSchema.updateOne(
+					{ id: call.request.getId() },
+					{
+						$set: {
+							name: call.request.getName(),
+							npm: call.request.getNpm(),
+							fak: call.request.getFak(),
+							bid: call.request.getBid(),
+							updatedAt: new Date()
+						}
+					},
+					{},
+					(error: any, result: StudentDTO) => {
+						if (error) {
+							studentResponse.setStatuscode('500')
+							studentResponse.setMessage('internal server error')
+							callback(null, studentResponse)
+						}
+		
+						if(result) {
+							studentResponse.setStatuscode('200')
+							studentResponse.setMessage('student data successfully to updated')
+							callback(null, studentResponse)
+						} else {
+							studentResponse.setStatuscode('200')
+							studentResponse.setMessage('student data failed to updated')
+							callback(null, studentResponse)
+						}	
+				})
+			} else {
+				studentResponse.setStatuscode('404')
+				studentResponse.setMessage('student data is not exist, or deleted from owner')
+				callback(null, studentResponse)
+			}
+		})
 	}
 }
