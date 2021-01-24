@@ -70,6 +70,7 @@
 ### About GRPC
 
 + **[gRPC Adoption and Working Architecture](https://www.xenonstack.com/insights/what-is-grpc/)**
++ **[Understanding Protocol Buffers](https://medium.com/better-programming/understanding-protocol-buffers-43c5bced0d47)**
 + **[Getting Started with gRPC and JavaScript - Colin Ihrig, Joyent](https://www.youtube.com/watch?v=fl9AZieRUaw)**
 + **[What are Protocol Buffers & When to Use them | Protobuf vs JSON](https://www.youtube.com/watch?v=9fh-XdUH7qw)**
 + **[Protocol Buffers in gRPC](https://www.youtube.com/watch?v=yfZB2_rT_Pc)**
