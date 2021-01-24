@@ -1,8 +1,8 @@
 {
 	"name": "express-grpc",
 	"version": "1.0.0",
-	"description": "example CRUD using GRPC (Google Remote Protocol)",
-	"main": "server.ts",
+	"description": "example CRUD using GRPC (Google Remote Procedure Call)",
+	"main": "dist/www/server.js",
 	"files": [
 		"dist/**/*.{js}"
 	],
@@ -23,9 +23,13 @@
 		"url": "https://github.com/restuwahyu13/express-grpc"
 	},
 	"keywords": [
-		"grpc",
+		"grpcjs",
 		"express",
-		"nodejs"
+		"nodejs",
+		"@grpc/grpc-js",
+		"grpc",
+		"typescript",
+		"grpc-tools"
 	],
 	"engines": {
 		"node": ">=10",

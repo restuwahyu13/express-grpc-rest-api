@@ -1,7 +1,74 @@
-### Express Grpc (Google Remote Protocol)
+### Express Typescript Grpc (Google Remote Procedure Call)
 
-berikut ini adalah tutorial basic implementasi cara menggunakan `grpc` **(google remote protocol)**
+### Install Make GNU
 
-### NOTED
+- MacOs
+ ```sh
+  brew install make
+ ```
 
-**work on progress**
+- Linux
+ ```sh
+  apt-get install make
+ ```
+ 
+ - Windows
+ ```sh
+  choco install make
+ ```
+
+### Run Command
+
++ **Production**
+
+  ```sh
+  make prod type=server or make prod type=client
+  ```
+
++ **Development**
+
+  ```sh
+  make dev  type=server or make dev type=client
+  ```
+  
++ **Build Application**
+
+  ```sh
+  make build
+  ```
+
+### Generate Config
+
++ **windows**
+
+  ```sh
+  make grpcwin
+  ```
+
++ **Linux/MacOS**
+
+  ```sh
+  make grpclinmac
+  ```
+
+### Route Endpoint
+
+| Name            | Method   | Route               |
+| --------------- | -------- | ------------------- |
+| Create Student  | *POST*   | **/api/v1/mhs**     |
+| Results Student | *GET*    | **/api/v1/mhs**     |
+| Result Student  | *GET*    | **/api/v1/mhs/:id** |
+| Delete Student  | *DELETE* | **/api/v1/mhs/:id** |
+| Update Student  | *PUT*    | **/api/v1/mhs/:id** | 
+
+### About GRPC
+
++ **[Getting Started with gRPC and JavaScript - Colin Ihrig, Joyent](https://www.youtube.com/watch?v=fl9AZieRUaw)**
++ **[What are Protocol Buffers & When to Use them | Protobuf vs JSON](https://www.youtube.com/watch?v=9fh-XdUH7qw)**
++ **[Protocol Buffers in gRPC](https://www.youtube.com/watch?v=yfZB2_rT_Pc)**
++ **[GRPC Tutorial Using module grpc](https://github.com/restuwahyu13/node-grpc-typescript)**
++ **[GRPC Tutorial Using module @grpc/grpc-js](https://github.com/restuwahyu13/express-grpc-rest-api)**
+
+### Author
+
+- **[Restu Wahyu Saputra](https://github.com/restuwahyu13)**
