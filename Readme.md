@@ -19,6 +19,12 @@
 
 ### Run Command
 
++ **Install Package**
+
+  ```sh
+  npm install && npm audit fix
+  ```
+
 + **Production**
 
   ```sh
