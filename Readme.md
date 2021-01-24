@@ -74,6 +74,7 @@
 + **[Protocol Buffers in gRPC](https://www.youtube.com/watch?v=yfZB2_rT_Pc)**
 + **[GRPC Tutorial Using module grpc](https://github.com/restuwahyu13/node-grpc-typescript)**
 + **[GRPC Tutorial Using module @grpc/grpc-js](https://github.com/restuwahyu13/express-grpc-rest-api)**
++ **[Creating a CRUD API with Node, Express, and gRPC](https://blog.logrocket.com/creating-a-crud-api-with-node-express-and-grpc/)**
 
 ### Author
 
