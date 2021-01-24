@@ -131,7 +131,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 				callback(error, studentResponse)
 			}
 
-			if(result) {
+			if (result) {
 				studentSchema.updateOne(
 					{ id: call.request.getId() },
 					{
@@ -150,8 +150,8 @@ export const StudentSeviceImplementation: IStudentServer = {
 							studentResponse.setMessage('internal server error')
 							callback(null, studentResponse)
 						}
-		
-						if(result) {
+
+						if (result) {
 							studentResponse.setStatuscode('200')
 							studentResponse.setMessage('student data successfully to updated')
 							callback(null, studentResponse)
@@ -159,8 +159,9 @@ export const StudentSeviceImplementation: IStudentServer = {
 							studentResponse.setStatuscode('200')
 							studentResponse.setMessage('student data failed to updated')
 							callback(null, studentResponse)
-						}	
-				})
+						}
+					}
+				)
 			} else {
 				studentResponse.setStatuscode('404')
 				studentResponse.setMessage('student data is not exist, or deleted from owner')
