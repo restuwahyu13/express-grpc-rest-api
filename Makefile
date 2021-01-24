@@ -16,6 +16,16 @@ build:
 	${NPM} ${FLAG} build
 
 ###############################
+## RUNNING PROD APP ENVIRONMENT
+################################
+
+prod:
+
+ifdef type
+	${NPM} ${FLAG} ${type}:start
+endif
+
+###############################
 ## RUNNING DEV APP ENVIRONMENT
 ################################
 

@@ -92,10 +92,10 @@ export const StudentSeviceImplementation: IStudentServer = {
 			}
 		})
 	},
-	deleteStudent: (call: UnaryCall<StudentId, Empty>, callback: UnaryData<StudentResponse>) => {
+	deleteStudent: (call: UnaryCall<StudentId, StudentResponse>, callback: UnaryData<StudentResponse>) => {
 		const studentResponse = new StudentResponse()
 
-		studentSchema.findByIdAndDelete({ id: call.request.getId() }, (error: any, result: StudentDTO) => {
+		studentSchema.findOne({ id: call.request.getId() }, (error: any, result: StudentDTO) => {
 			if (error) {
 				studentResponse.setStatuscode('500')
 				studentResponse.setMessage('internal server error')
@@ -103,9 +103,17 @@ export const StudentSeviceImplementation: IStudentServer = {
 			}
 
 			if (result) {
-				studentResponse.setStatuscode('200')
-				studentResponse.setMessage('student data successfully to deleted')
-				callback(null, studentResponse)
+				studentSchema.deleteOne({ id: result.id }, (error: any) => {
+					if (error) {
+						studentResponse.setStatuscode('500')
+						studentResponse.setMessage('internal server error')
+						callback(null, studentResponse)
+					}
+
+					studentResponse.setStatuscode('200')
+					studentResponse.setMessage('student data successfully to deleted')
+					callback(null, studentResponse)
+				})
 			} else {
 				studentResponse.setStatuscode('404')
 				studentResponse.setMessage('student data is not exist, or deleted from owner')
@@ -131,7 +139,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 				if (error) {
 					studentResponse.setStatuscode('500')
 					studentResponse.setMessage('internal server error')
-					callback(error, studentResponse)
+					callback(null, studentResponse)
 				}
 
 				if (result) {

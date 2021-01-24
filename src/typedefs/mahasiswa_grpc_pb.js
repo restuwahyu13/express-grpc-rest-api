@@ -95,6 +95,28 @@ var StudentService = exports.StudentService = {
     responseSerialize: serialize_student_StudentResponse,
     responseDeserialize: deserialize_student_StudentResponse,
   },
+  deleteStudent: {
+    path: '/student.Student/DeleteStudent',
+    requestStream: false,
+    responseStream: false,
+    requestType: mahasiswa_pb.StudentId,
+    responseType: mahasiswa_pb.StudentResponse,
+    requestSerialize: serialize_student_StudentId,
+    requestDeserialize: deserialize_student_StudentId,
+    responseSerialize: serialize_student_StudentResponse,
+    responseDeserialize: deserialize_student_StudentResponse,
+  },
+  updateStudent: {
+    path: '/student.Student/UpdateStudent',
+    requestStream: false,
+    responseStream: false,
+    requestType: mahasiswa_pb.StudentRequest,
+    responseType: mahasiswa_pb.StudentResponse,
+    requestSerialize: serialize_student_StudentRequest,
+    requestDeserialize: deserialize_student_StudentRequest,
+    responseSerialize: serialize_student_StudentResponse,
+    responseDeserialize: deserialize_student_StudentResponse,
+  },
 };
 
 exports.StudentClient = grpc.makeGenericClientConstructor(StudentService);

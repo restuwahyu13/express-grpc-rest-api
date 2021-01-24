@@ -11,8 +11,7 @@ const server = new grpc.Server()
 mongoose
 	.connect(process.env.MONGO_URI, {
 		useUnifiedTopology: true,
-		useNewUrlParser: true,
-		useCreateIndex: true
+		useNewUrlParser: true
 	})
 	.then(() => console.log('database connected'))
 	.catch(() => console.log('database not connected'))
