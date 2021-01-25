@@ -1,4 +1,4 @@
-import wait , { ClearablePromise } from 'delay'
+import wait, { ClearablePromise } from 'delay'
 
-export{  ClearablePromise  }
-export const waitFor = (delay?: number): ClearablePromise<void> => delay !== undefined || null ? wait(delay) : wait(3000)
+export { ClearablePromise }
+export const waitFor = (delay?: number): ClearablePromise<void> => (delay !== undefined || null ? wait(delay) : wait(3000))
