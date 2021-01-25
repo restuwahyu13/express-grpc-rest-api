@@ -47,6 +47,7 @@
 		"cors": "^2.8.5",
 		"delay": "^4.4.0",
 		"dotenv": "^8.2.0",
+		"eventemitter3": "^4.0.7",
 		"express": "^4.17.1",
 		"google-protobuf": "^3.14.0",
 		"helmet": "^4.3.1",

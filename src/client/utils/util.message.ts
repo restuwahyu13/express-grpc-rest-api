@@ -1,8 +1,9 @@
 import { Response } from 'express'
 import { waitFor, ClearablePromise } from './util.wait'
-import EventEmitter from 'events'
+import EventEmitter from 'eventemitter3'
 import { GrpcError } from './util.error'
-const event = new EventEmitter()
+
+let event = new EventEmitter()
 
 interface IMessage {
 	method: string
@@ -28,10 +29,11 @@ export const grpcMessage = <T extends Readonly<IMessage>>(incomingMessage: Respo
 		} else if ((typeof opt.data !== 'object' && opt.data !== undefined) || null) {
 			incomingMessage.json({ error: new GrpcError('data must be a object or array') })
 		} else {
-			event.once('message', (): void => {
-				incomingMessage.status(opt.statusCode).json({ ...opt })
+			event.once('message', (data): void => {
+				incomingMessage.status(data.statusCode).json({ ...data })
 			})
-			event.emit('message')
+			event.emit('message', { ...opt })
+			event.removeListener('message')
 		}
 		wait.clear()
 	} catch (e) {}
