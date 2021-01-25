@@ -109,11 +109,18 @@ endif
 ## BUILD AUTOMATION
 ################################
 
-build: linfix.o  build.o 
+build:
+	${NPM} ${FLAG} build
+
+###############################
+## BUILD AUTOMATION AND LINT FIX
+################################
+
+buildfix: linfix.o  build.o 
 
 linfix.o:
 
-	${NPM} ${FLAG} lint:ffix
+	${NPM} ${FLAG} lint:fix
 
 build.o:
 	${NPM} ${FLAG} build

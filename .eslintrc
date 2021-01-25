@@ -6,7 +6,7 @@
 	"parser": "@typescript-eslint/parser",
 	"extends": ["standard", "plugin:@typescript-eslint/recommended", "plugin:security/recommended", "plugin:prettier/recommended"],
 	"rules": {
-		"prettier/prettier": 1,
+		"prettier/prettier": 0,
 		"@typescript-eslint/no-explicit-any": 0,
 		"node/handle-callback-err": 0,
 		"prefer-const": 0,
