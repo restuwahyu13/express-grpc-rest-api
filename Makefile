@@ -4,7 +4,7 @@ FLAG := run
 INPUT_DIR := ${realpath src/protos}
 OUTPUT_DIR := ${realpath src/typedefs}
 FIND_FILE := ${wildcard ${OUTPUT_DIR}/*.ts}
-GRPC_TOOLS = grpc_tools_node_protoc
+GRPC_TOOLS = npx grpc_tools_node_protoc
 PROTOC_GEN_TS_PATH_WINDOWS := ${realpath node_modules/.bin/protoc-gen-ts.cmd}
 PROTOC_GEN_TS_PATH_LINMAC := ${realpath node_modules/.bin/protoc-gen-ts}
 
@@ -84,10 +84,10 @@ endif
 
 grpclinmac:
 ifneq (${FIND_FILE}, )
-	#remove old all file typedefs
+#remove old all file typedefs
 	rm ${OUTPUT_DIR}/**.{ts,js}
 
-	#generate protofile typedefs
+#generate protofile typedefs
 	${shell exec} ${GRPC_TOOLS} \
 	--plugin=protoc-gen-ts=${PROTOC_GEN_TS_PATH_LINMAC} \
 	--grpc_out=grpc_js:${OUTPUT_DIR} \
@@ -95,7 +95,7 @@ ifneq (${FIND_FILE}, )
 	--ts_out=grpc_js:${OUTPUT_DIR} \
 	--proto_path ${INPUT_DIR} ${INPUT_DIR}/*.proto
 else
-	#generate protofile typedefs if file not exist
+#generate protofile typedefs if file not exist
 	${shell exec} ${GRPC_TOOLS} \
 	--plugin=protoc-gen-ts=${PROTOC_GEN_TS_PATH_LINMAC} \
 	--grpc_out=grpc_js:${OUTPUT_DIR} \
@@ -116,7 +116,7 @@ build:
 ## BUILD AUTOMATION AND LINT FIX
 ################################
 
-buildfix: linfix.o  build.o 
+buildfix: linfix.o  build.o
 
 linfix.o:
 

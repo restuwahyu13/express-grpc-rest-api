@@ -11,7 +11,7 @@ export const pluginMiddleware = (app: Express): void => {
 	app.use(bodyParser.json())
 	app.use(bodyParser.urlencoded({ extended: false }))
 	app.use(cors())
-	app.use(helmet({ contentSecurityPolicy: false }))
+	app.use(helmet())
 	app.use(
 		compression({
 			level: 9,

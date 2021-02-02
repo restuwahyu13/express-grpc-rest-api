@@ -30,13 +30,13 @@ message StudentResponse {
     string fak = 5;
     string created_at = 6;
     string updated_at = 7;
-    string statusCode = 10;
+    int32 statusCode = 10;
     string message = 11;
 }
 
 message StudentList {
   repeated StudentRequest students = 1;
-  string statusCode = 2;
+  int32 statusCode = 2;
   string message = 3;
 }
 

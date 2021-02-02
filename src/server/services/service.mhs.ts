@@ -12,13 +12,13 @@ export const StudentSeviceImplementation: IStudentServer = {
 
 		studentSchema.find({ $or: [{ npm: call.request.getNpm() }] }, (error: any, results: StudentDTO[]) => {
 			if (error) {
-				studentResponse.setStatuscode('500')
+				studentResponse.setStatuscode(500)
 				studentResponse.setMessage('Internal Server Error')
 				callback(null, studentResponse)
 			}
 
 			if (results.length > 0) {
-				studentResponse.setStatuscode('409')
+				studentResponse.setStatuscode(409)
 				studentResponse.setMessage('student already exist')
 				callback(null, studentResponse)
 			} else {
@@ -31,11 +31,11 @@ export const StudentSeviceImplementation: IStudentServer = {
 				})
 
 				if (saveUser) {
-					studentResponse.setStatuscode('201')
+					studentResponse.setStatuscode(201)
 					studentResponse.setMessage('add new student successfully')
 					callback(null, studentResponse)
 				} else {
-					studentResponse.setStatuscode('403')
+					studentResponse.setStatuscode(403)
 					studentResponse.setMessage('add new student failed')
 					callback(null, studentResponse)
 				}
@@ -47,18 +47,18 @@ export const StudentSeviceImplementation: IStudentServer = {
 
 		studentSchema.find({}, (error: any, results: StudentDTO[]) => {
 			if (error) {
-				studentsList.setStatuscode('500')
+				studentsList.setStatuscode(500)
 				studentsList.setMessage('internal server error')
 				callback(null, studentsList)
 			}
 
 			if (results.length > 0) {
 				studentsList.setStudentsList(studentsResponse(results))
-				studentsList.setStatuscode('200')
+				studentsList.setStatuscode(200)
 				studentsList.setMessage('student data already to use')
 				callback(null, studentsList)
 			} else {
-				studentsList.setStatuscode('404')
+				studentsList.setStatuscode(404)
 				studentsList.setMessage('student data is not exist, or deleted from owner')
 				callback(null, studentsList)
 			}
@@ -69,7 +69,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 
 		studentSchema.findOne({ id: call.request.getId() }, (error: any, result: StudentDTO) => {
 			if (error) {
-				studentResponse.setStatuscode('500')
+				studentResponse.setStatuscode(500)
 				studentResponse.setMessage('internal server error')
 				callback(null, studentResponse)
 			}
@@ -82,11 +82,11 @@ export const StudentSeviceImplementation: IStudentServer = {
 				studentResponse.setBid(result.bid)
 				studentResponse.setCreatedAt(new Date(result.createdAt).toISOString())
 				studentResponse.setUpdatedAt(new Date(result.updatedAt).toISOString())
-				studentResponse.setStatuscode('200')
+				studentResponse.setStatuscode(200)
 				studentResponse.setMessage('student data already to use')
 				callback(null, studentResponse)
 			} else {
-				studentResponse.setStatuscode('404')
+				studentResponse.setStatuscode(404)
 				studentResponse.setMessage('student data is not exist, or deleted from owner')
 				callback(null, studentResponse)
 			}
@@ -97,7 +97,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 
 		studentSchema.findOne({ id: call.request.getId() }, (error: any, result: StudentDTO) => {
 			if (error) {
-				studentResponse.setStatuscode('500')
+				studentResponse.setStatuscode(500)
 				studentResponse.setMessage('internal server error')
 				callback(error, studentResponse)
 			}
@@ -105,17 +105,17 @@ export const StudentSeviceImplementation: IStudentServer = {
 			if (result) {
 				studentSchema.deleteOne({ id: result.id }, {}, (error: any) => {
 					if (error) {
-						studentResponse.setStatuscode('500')
+						studentResponse.setStatuscode(500)
 						studentResponse.setMessage('internal server error')
 						callback(null, studentResponse)
 					}
 
-					studentResponse.setStatuscode('200')
+					studentResponse.setStatuscode(200)
 					studentResponse.setMessage('student data successfully to deleted')
 					callback(null, studentResponse)
 				})
 			} else {
-				studentResponse.setStatuscode('404')
+				studentResponse.setStatuscode(404)
 				studentResponse.setMessage('student data is not exist, or deleted from owner')
 				callback(null, studentResponse)
 			}
@@ -126,7 +126,7 @@ export const StudentSeviceImplementation: IStudentServer = {
 
 		studentSchema.findOne({ id: call.request.getId() }, (error: any, result: StudentDTO) => {
 			if (error) {
-				studentResponse.setStatuscode('500')
+				studentResponse.setStatuscode(500)
 				studentResponse.setMessage('internal server error')
 				callback(error, studentResponse)
 			}
@@ -146,24 +146,24 @@ export const StudentSeviceImplementation: IStudentServer = {
 					{},
 					(error: any, result: StudentDTO) => {
 						if (error) {
-							studentResponse.setStatuscode('500')
+							studentResponse.setStatuscode(500)
 							studentResponse.setMessage('internal server error')
 							callback(null, studentResponse)
 						}
 
 						if (result) {
-							studentResponse.setStatuscode('200')
+							studentResponse.setStatuscode(200)
 							studentResponse.setMessage('student data successfully to updated')
 							callback(null, studentResponse)
 						} else {
-							studentResponse.setStatuscode('200')
+							studentResponse.setStatuscode(200)
 							studentResponse.setMessage('student data failed to updated')
 							callback(null, studentResponse)
 						}
 					}
 				)
 			} else {
-				studentResponse.setStatuscode('404')
+				studentResponse.setStatuscode(404)
 				studentResponse.setMessage('student data is not exist, or deleted from owner')
 				callback(null, studentResponse)
 			}

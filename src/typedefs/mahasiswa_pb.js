@@ -453,7 +453,7 @@ proto.student.StudentResponse.toObject = function(includeInstance, msg) {
     fak: jspb.Message.getFieldWithDefault(msg, 5, ""),
     createdAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
     updatedAt: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    statuscode: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    statuscode: jspb.Message.getFieldWithDefault(msg, 10, 0),
     message: jspb.Message.getFieldWithDefault(msg, 11, "")
   };
 
@@ -520,7 +520,7 @@ proto.student.StudentResponse.deserializeBinaryFromReader = function(msg, reader
       msg.setUpdatedAt(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setStatuscode(value);
       break;
     case 11:
@@ -606,8 +606,8 @@ proto.student.StudentResponse.serializeBinaryToWriter = function(message, writer
     );
   }
   f = message.getStatuscode();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt32(
       10,
       f
     );
@@ -749,20 +749,20 @@ proto.student.StudentResponse.prototype.setUpdatedAt = function(value) {
 
 
 /**
- * optional string statusCode = 10;
- * @return {string}
+ * optional int32 statusCode = 10;
+ * @return {number}
  */
 proto.student.StudentResponse.prototype.getStatuscode = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.student.StudentResponse} returns this
  */
 proto.student.StudentResponse.prototype.setStatuscode = function(value) {
-  return jspb.Message.setProto3StringField(this, 10, value);
+  return jspb.Message.setProto3IntField(this, 10, value);
 };
 
 
@@ -825,7 +825,7 @@ proto.student.StudentList.toObject = function(includeInstance, msg) {
   var f, obj = {
     studentsList: jspb.Message.toObjectList(msg.getStudentsList(),
     proto.student.StudentRequest.toObject, includeInstance),
-    statuscode: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    statuscode: jspb.Message.getFieldWithDefault(msg, 2, 0),
     message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -869,7 +869,7 @@ proto.student.StudentList.deserializeBinaryFromReader = function(msg, reader) {
       msg.addStudents(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setStatuscode(value);
       break;
     case 3:
@@ -914,8 +914,8 @@ proto.student.StudentList.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getStatuscode();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt32(
       2,
       f
     );
@@ -969,20 +969,20 @@ proto.student.StudentList.prototype.clearStudentsList = function() {
 
 
 /**
- * optional string statusCode = 2;
- * @return {string}
+ * optional int32 statusCode = 2;
+ * @return {number}
  */
 proto.student.StudentList.prototype.getStatuscode = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.student.StudentList} returns this
  */
 proto.student.StudentList.prototype.setStatuscode = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
